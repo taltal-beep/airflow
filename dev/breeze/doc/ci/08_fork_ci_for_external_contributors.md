@@ -617,8 +617,9 @@ budget stays observable.
 - `permissions: contents: read, pull-requests: write, statuses: write` with a justification
   comment. Comments and labels on pull requests are covered by `pull-requests: write`; the
   commit status needs `statuses: write`.
-- `runs-on: ubuntu-slim`, `timeout-minutes: 20`, `concurrency: fork-ci-monitor` with
-  `cancel-in-progress: false` so runs never overlap.
+- `runs-on: ubuntu-latest` (the breeze setup action frees disk space with `sudo` and `docker`,
+  which `ubuntu-slim` does not provide), `timeout-minutes: 20`, `concurrency: fork-ci-monitor`
+  with `cancel-in-progress: false` so runs never overlap.
 - Steps: checkout `main` with `persist-credentials: false`, `./.github/actions/breeze`,
   `breeze ci fork-ci-reconcile` with `GH_TOKEN`, then the Slack post step guarded by
   `has-alerts`.
